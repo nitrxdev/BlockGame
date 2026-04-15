@@ -23,6 +23,10 @@ const SHAPES = [
   { shape: [[0,0],[1,1],[2,2]], weight: 1 }, // 2 diag
   { shape: [[0,0],[1,1]], weight: 2 }, // 2w 1h
   { shape: [[0,0],[1,0]], weight: 2 }, // 1w 2h
+  { shape: [[0,0],[1,0],[2,0],[2,1],[3,1]], weight: 3 },
+  { shape: [[0,1],[1,1],[2,1],[2,0],[3,0]], weight: 3 }, // flipped
+  { shape: [[0,1],[0,2],[1,0],[1,1]], weight: 3 },
+  { shape: [[0,0],[0,1],[1,1],[1,2]], weight: 3 }, // flipped
 ];
 
 const COLORS = ['#FF6B6B', '#4ECDC4', '#FFD93D', '#6A4C93', '#FF8C42', '#2E86AB'];
@@ -90,7 +94,7 @@ export default function Game() {
     rowsToClear.forEach(r => { for (let c = 0; c < GRID_SIZE; c++) nextGrid[r][c] = false; });
     colsToClear.forEach(c => { for (let r = 0; r < GRID_SIZE; r++) nextGrid[r][c] = false; });
 
-    const points = piece.shape.length + (rowsToClear.length + colsToClear.length) * 10;
+    const points = (piece.shape.length + (rowsToClear.length + colsToClear.length) * 10) * 8;
     setGrid(nextGrid);
     setScore(prev => prev + points);
     setPieces(prev => {
